@@ -7,7 +7,6 @@ Glossary
    :hidden:
 
    Checkpoint <../guide/checkpoint/index>
-   LitLogger <../guide/loggers/litlogger>
    Weights and Biases <../guide/loggers/wandb>
    Wrappers <../api/wrappers>
    Model Parallel <../advanced/model_parallel/index>

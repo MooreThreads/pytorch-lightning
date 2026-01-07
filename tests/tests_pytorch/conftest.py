@@ -170,7 +170,6 @@ def thread_police_duuu_daaa_duuu_daaa():
             sys.version_info >= (3, 9)
             and isinstance(thread, _ExecutorManagerThread)
             or "ThreadPoolExecutor-" in thread.name
-            or thread.name == "InductorSubproc"  # torch.compile
         ):
             # probably `torch.compile`, can't narrow it down further
             continue
@@ -203,6 +202,30 @@ def cuda_count_2(monkeypatch):
 @pytest.fixture
 def cuda_count_4(monkeypatch):
     mock_cuda_count(monkeypatch, 4)
+
+def mock_musa_count(monkeypatch, n: int) -> None:
+    monkeypatch.setattr(lightning.fabric.accelerators.musa, "num_musa_devices", lambda: n)
+    monkeypatch.setattr(lightning.pytorch.accelerators.musa, "num_musa_devices", lambda: n)
+
+
+@pytest.fixture
+def musa_count_0(monkeypatch):
+    mock_musa_count(monkeypatch, 0)
+
+
+@pytest.fixture
+def musa_count_1(monkeypatch):
+    mock_musa_count(monkeypatch, 1)
+
+
+@pytest.fixture
+def musa_count_2(monkeypatch):
+    mock_musa_count(monkeypatch, 2)
+
+
+@pytest.fixture
+def musa_count_4(monkeypatch):
+    mock_musa_count(monkeypatch, 4)
 
 
 def mock_mps_count(monkeypatch, n: int) -> None:

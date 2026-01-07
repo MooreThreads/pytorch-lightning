@@ -14,6 +14,7 @@ accelerators
     CPUAccelerator
     CUDAAccelerator
     XLAAccelerator
+    MUSAAccelerator
 
 callbacks
 ---------
@@ -95,7 +96,6 @@ loggers
     :nosignatures:
 
     logger
-    litlogger
     comet
     csv_logs
     mlflow

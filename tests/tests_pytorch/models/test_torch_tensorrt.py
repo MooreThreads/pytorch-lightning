@@ -10,7 +10,6 @@ import tests_pytorch.helpers.pipelines as pipes
 from lightning.pytorch.core.module import _TORCH_TRT_AVAILABLE
 from lightning.pytorch.demos.boring_classes import BoringModel
 from lightning.pytorch.utilities.exceptions import MisconfigurationException
-from lightning.pytorch.utilities.imports import _TORCH_EQUAL_2_9
 from tests_pytorch.helpers.runif import RunIf
 
 
@@ -111,14 +110,7 @@ def test_tensorrt_saves_on_multi_gpu(tmp_path):
     [
         ("default", torch.fx.GraphModule),
         ("dynamo", torch.fx.GraphModule),
-        pytest.param(
-            "ts",
-            torch.jit.ScriptModule,
-            marks=pytest.mark.skipif(
-                _TORCH_EQUAL_2_9,
-                reason="TorchScript IR crashes with torch_tensorrt on PyTorch 2.9",
-            ),
-        ),
+        ("ts", torch.jit.ScriptModule),
     ],
 )
 @RunIf(tensorrt=True, min_cuda_gpus=1, min_torch="2.2.0")
@@ -136,17 +128,7 @@ def test_tensorrt_save_ir_type(ir, export_type):
 )
 @pytest.mark.parametrize(
     "ir",
-    [
-        "default",
-        "dynamo",
-        pytest.param(
-            "ts",
-            marks=pytest.mark.skipif(
-                _TORCH_EQUAL_2_9,
-                reason="TorchScript IR crashes with torch_tensorrt on PyTorch 2.9",
-            ),
-        ),
-    ],
+    ["default", "dynamo", "ts"],
 )
 @RunIf(tensorrt=True, min_cuda_gpus=1, min_torch="2.2.0")
 def test_tensorrt_export_reload(output_format, ir, tmp_path):

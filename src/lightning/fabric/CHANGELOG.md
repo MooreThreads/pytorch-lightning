@@ -5,31 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 
-## [Unreleased] - YYYY-MM-DD
+## [unreleased] - YYYY-MM-DD
 
 ### Added
 
--
+- Added kwargs-filtering for `Fabric.call` to support different callback method signatures ([#21258](https://github.com/Lightning-AI/pytorch-lightning/pull/21258))
 
-### Changed
-
--
-
-### Fixed
-
-- Fixed DDP notebook CUDA fork check to allow passive initialization when CUDA is not actively used ([#21402](https://github.com/Lightning-AI/pytorch-lightning/pull/21402))
 
 ### Removed
 
 -
 
 
-## [2.6.0] - 2025-11-28
+---
 
-### Added
-
-- Added kwargs-filtering for `Fabric.call` to support different callback method signatures ([#21258](https://github.com/Lightning-AI/pytorch-lightning/pull/21258))
-
+## [2.6.0] - 2025-11-21
 
 ### Changed
 
